@@ -1,0 +1,51 @@
+@import "mixins";
+@import "default";
+
+%sidebar-progress {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: calcWidth(30, 1000);
+  background: $primaryPurplishBlue url(./assets/images/bg-sidebar-desktop.svg)
+    no-repeat;
+  background-position: center bottom;
+  background-size: 100%;
+  border-radius: 15px;
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin: 30px 20px;
+
+    > span {
+      @extend %sidebar-progress;
+      @include border-mixin($primaryLightBlue, 50%);
+      color: #fff;
+    }
+    > span[role="active"] {
+      background-color: $primaryLightBlue;
+      border: none;
+      color: #000;
+    }
+
+    > .card__heading {
+      @include generic-font(15px, normal, uppercase);
+      color: #fff;
+
+      span {
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+
+      h4 {
+        letter-spacing: 2px;
+      }
+    }
+  }
+}

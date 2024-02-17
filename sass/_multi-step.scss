@@ -1,0 +1,163 @@
+@import "mixins";
+@import "default";
+@import "button";
+@import "plans-card";
+
+.multi-step__container {
+  width: 700px;
+  form {
+    display: flex;
+    max-width: 100%;
+    margin: 0 50px;
+    overflow: hidden;
+
+    .step {
+      min-width: 100%;
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        @include generic-font(32px, 700, capitalize);
+        margin-bottom: 10px;
+        + p {
+          // @include generic-font(normal, 400, capitalize);
+          margin-bottom: 30px;
+        }
+      }
+
+      .btn__navigate-page {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      a {
+        margin-top: 50px;
+      }
+
+      &1 {
+        > span {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          margin: 10px 0;
+
+          input {
+            @include generic-input(15px, null, 5px);
+            @include generic-font(14px, 700, initial);
+            width: 100%;
+            color: $primaryStrawberryRed;
+          }
+
+          input::placeholder {
+            color: $neutralCoolGray;
+            @include generic-font(14px, 500, initial);
+          }
+        }
+      }
+
+      &2 {
+        > section {
+          display: flex;
+          justify-content: space-around;
+          width: 100%;
+        }
+
+        figure {
+          width: 100%;
+          @extend %figure;
+        }
+
+        .toggle__container {
+          display: flex;
+          margin-top: 40px;
+          padding: 15px;
+          width: 100%;
+          align-self: center;
+          justify-self: center;
+          justify-content: space-between;
+          background-color: $neutralAlabaster;
+          @include border-mixin(none, 5px);
+          color: $neutralCoolGray;
+        }
+
+        .switch {
+          @extend %switch;
+        }
+      }
+
+      &3 {
+        .add-ons__card {
+          > div {
+            display: flex;
+            background-color: $neutralWhite;
+            margin: 20px 0;
+            @extend %figure;
+            max-width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            @include generic-input(15px, null, 5px);
+
+            > span {
+              display: flex;
+              gap: 10px;
+            }
+
+            > p {
+              color: $primaryPurplishBlue;
+            }
+          }
+        }
+      }
+
+      &4 {
+        .arcade__card {
+          padding: 20px 30px;
+          background-color: $neutralAlabaster;
+          margin-bottom: 20px;
+
+          > div:nth-child(1) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+          }
+
+          #main-plan__details {
+            div {
+              display: flex;
+              justify-content: space-between;
+              margin: 15px 0;
+            }
+          }
+        }
+
+        aside {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          p {
+            color: $neutralCoolGray;
+          }
+
+          h3 {
+            @include generic-font(20px, 700, normal);
+            color: $primaryPurplishBlue;
+          }
+        }
+      }
+    }
+
+    section[id="active-section"] {
+      flex: 1;
+      width: 100%;
+    }
+  }
+
+  .confirmation__page {
+    display: none;
+  }
+}

@@ -1,0 +1,64 @@
+@import "config";
+
+@mixin button-primary {
+  cursor: pointer;
+  background-color: $primaryMarineBlue;
+  border-radius: 5px;
+  color: $neutralWhite;
+  padding: 10px 15px;
+  display: inline-block;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+@each $wght in $fontWeights {
+  .fw-#{$wght} {
+    font-weight: $wght;
+  }
+}
+
+@mixin set-weight {
+  @each $wght in $fontWeights {
+    .fw-#{$wght} {
+      font-weight: $wght;
+    }
+  }
+}
+
+@mixin generic-font($size, $wght, $type) {
+  font-size: $size;
+
+  @if $wght {
+    font-weight: $wght;
+  } @else {
+    @include set-weight;
+  }
+  text-transform: $type;
+}
+
+@mixin border-mixin($value, $radius: 0px) {
+  border: 1px solid $value;
+  @if $radius {
+    border-radius: $radius;
+  }
+}
+
+@mixin border-state($state, $radius) {
+  @if $state == error {
+    @include border-mixin($primaryStrawberryRed, $radius);
+  } @else if $state == success {
+    @include border-mixin($primaryPurplishBlue, $radius);
+  } @else {
+    @include border-mixin($neutralCoolGray, $radius);
+  }
+}
+
+@mixin generic-input($padding, $state-value, $rad) {
+  padding: $padding;
+  @include border-state($state-value, $rad);
+}
+
+// Functions
+@function calcWidth($perc, $relative) {
+  @return calc(($perc/100) * $relative) * 1px;
+}

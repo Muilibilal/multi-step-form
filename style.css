@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 1440px;
+  max-width: 100%;
+  font-family: "Ubuntu", sans-serif;
+  background-color: hsl(217, 100%, 97%);
+}
+
+main {
+  width: 1000px;
+  max-height: 100%;
+  max-width: 100%;
+  display: flex;
+  margin: 100px auto;
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.card > div > span {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 300px;
+  background: hsl(243, 100%, 62%) url(./assets/images/bg-sidebar-desktop.svg) no-repeat;
+  background-position: center bottom;
+  background-size: 100%;
+  border-radius: 15px;
+}
+.card > div {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin: 30px 20px;
+}
+.card > div > span {
+  border: 1px solid hsl(206, 94%, 87%);
+  border-radius: 50%;
+  color: #fff;
+}
+.card > div > span[role=active] {
+  background-color: hsl(206, 94%, 87%);
+  border: none;
+  color: #000;
+}
+.card > div > .card__heading {
+  font-size: 15px;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: #fff;
+}
+.card > div > .card__heading span {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.card > div > .card__heading h4 {
+  letter-spacing: 2px;
+}
+
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 1440px;
+  max-width: 100%;
+  font-family: "Ubuntu", sans-serif;
+  background-color: hsl(217, 100%, 97%);
+}
+
+main {
+  width: 1000px;
+  max-height: 100%;
+  max-width: 100%;
+  display: flex;
+  margin: 100px auto;
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+a[role=button] {
+  cursor: pointer;
+  background-color: hsl(213, 96%, 18%);
+  border-radius: 5px;
+  color: hsl(0, 0%, 100%);
+  padding: 10px 15px;
+  display: inline-block;
+  align-self: flex-end;
+  margin-top: auto;
+  text-decoration: none;
+}
+
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+.multi-step__container form .step3 .add-ons__card > div, .multi-step__container form .step2 figure {
+  cursor: pointer;
+  border: 1px solid hsl(231, 11%, 63%);
+  border-radius: 5px;
+  margin: 0 5px;
+  padding: 20px;
+}
+.multi-step__container form .step3 .add-ons__card > div:hover, .multi-step__container form .step2 figure:hover {
+  border: 1px solid hsl(213, 96%, 18%);
+  border-radius: 5px;
+}
+.multi-step__container form .step3 .add-ons__card > div:focus, .multi-step__container form .step2 figure:focus {
+  border: 1px solid hsl(213, 96%, 18%);
+  border-radius: 5px;
+  background-color: hsl(217, 100%, 97%);
+}
+.multi-step__container form .step3 .add-ons__card > div img, .multi-step__container form .step2 figure img {
+  display: inline-block;
+  width: 40px;
+  margin-bottom: 50px;
+}
+.multi-step__container form .step3 .add-ons__card > div figcaption, .multi-step__container form .step2 figure figcaption {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: hsl(213, 96%, 18%);
+  margin-bottom: 10px;
+}
+.multi-step__container form .step3 .add-ons__card > div p, .multi-step__container form .step2 figure p {
+  color: hsl(231, 11%, 63%);
+}
+
+.multi-step__container form .step2 .switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 22px;
+}
+.multi-step__container form .step2 .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.multi-step__container form .step2 .switch input:focus + .slider {
+  box-shadow: 0 0 1px hsl(213, 96%, 18%);
+}
+.multi-step__container form .step2 .switch input:checked + .slider {
+  background-color: hsl(213, 96%, 18%);
+}
+.multi-step__container form .step2 .switch input:checked + .slider.slider:before {
+  transform: translateX(22px);
+}
+.multi-step__container form .step2 .switch > .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+.multi-step__container form .step2 .switch > .slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+.multi-step__container form .step2 .switch > .slider.round {
+  border-radius: 34px;
+}
+.multi-step__container form .step2 .switch > .slider.round:before {
+  border-radius: 50%;
+}
+
+.multi-step__container {
+  width: 700px;
+}
+.multi-step__container form {
+  display: flex;
+  max-width: 100%;
+  margin: 0 50px;
+  overflow: hidden;
+}
+.multi-step__container form .step {
+  min-width: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.multi-step__container form .step h3 {
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+.multi-step__container form .step h3 + p {
+  margin-bottom: 30px;
+}
+.multi-step__container form .step .btn__navigate-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.multi-step__container form .step a {
+  margin-top: 50px;
+}
+.multi-step__container form .step1 > span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px 0;
+}
+.multi-step__container form .step1 > span input {
+  padding: 15px;
+  border: 1px solid hsl(231, 11%, 63%);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: initial;
+  width: 100%;
+  color: hsl(354, 84%, 57%);
+}
+.multi-step__container form .step1 > span input::placeholder {
+  color: hsl(231, 11%, 63%);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: initial;
+}
+.multi-step__container form .step2 > section {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.multi-step__container form .step2 figure {
+  width: 100%;
+}
+.multi-step__container form .step2 .toggle__container {
+  display: flex;
+  margin-top: 40px;
+  padding: 15px;
+  width: 100%;
+  align-self: center;
+  justify-self: center;
+  justify-content: space-between;
+  background-color: hsl(231, 100%, 99%);
+  border: 1px solid none;
+  border-radius: 5px;
+  color: hsl(231, 11%, 63%);
+}
+.multi-step__container form .step3 .add-ons__card > div {
+  display: flex;
+  background-color: hsl(0, 0%, 100%);
+  margin: 20px 0;
+  max-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border: 1px solid hsl(231, 11%, 63%);
+  border-radius: 5px;
+}
+.multi-step__container form .step3 .add-ons__card > div > span {
+  display: flex;
+  gap: 10px;
+}
+.multi-step__container form .step3 .add-ons__card > div > p {
+  color: hsl(243, 100%, 62%);
+}
+.multi-step__container form .step4 .arcade__card {
+  padding: 20px 30px;
+  background-color: hsl(231, 100%, 99%);
+  margin-bottom: 20px;
+}
+.multi-step__container form .step4 .arcade__card > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+.multi-step__container form .step4 .arcade__card #main-plan__details div {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+.multi-step__container form .step4 aside {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.multi-step__container form .step4 aside p {
+  color: hsl(231, 11%, 63%);
+}
+.multi-step__container form .step4 aside h3 {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: normal;
+  color: hsl(243, 100%, 62%);
+}
+.multi-step__container form section[id=active-section] {
+  flex: 1;
+  width: 100%;
+}
+.multi-step__container .confirmation__page {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */
