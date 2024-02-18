@@ -253,11 +253,19 @@ a[role=button] {
 .multi-step__container form .step a {
   margin-top: 50px;
 }
+.multi-step__container form .step1 span .error {
+  display: inline-block;
+  color: hsl(354, 84%, 57%);
+}
 .multi-step__container form .step1 > span {
   display: flex;
   flex-direction: column;
   gap: 5px;
   margin: 10px 0;
+}
+.multi-step__container form .step1 > span div {
+  display: flex;
+  justify-content: space-between;
 }
 .multi-step__container form .step1 > span input {
   padding: 15px;
@@ -267,7 +275,7 @@ a[role=button] {
   font-weight: 700;
   text-transform: initial;
   width: 100%;
-  color: hsl(354, 84%, 57%);
+  color: hsl(213, 96%, 18%);
 }
 .multi-step__container form .step1 > span input::placeholder {
   color: hsl(231, 11%, 63%);

@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const nextButtons = document.querySelectorAll(".step .next");
   const prevButtons = document.querySelectorAll(".step .previous");
 
-  const userInputsLabel = document.querySelectorAll(".step1 label");
+  const userInputsError = document.querySelectorAll(".step1 [role='error']");
+  const userInputInvalidEmail = document.querySelectorAll(
+    ".step1 #email-error"
+  )[0];
   const userInputs = document.querySelectorAll(".step1 input");
 
   const figureEls = document.querySelectorAll(".plans__card figure");
@@ -46,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function (event) {
       event.preventDefault();
 
-      if (verifyData(data)) {
+      if (verifyData()) {
         showStep(index + 1); // Show the next step
       }
     });
@@ -60,8 +63,45 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  function verifyData(...data) {
-    return true;
+  function verifyData() {
+    let dataState = [];
+
+    userInputs.forEach((input, idx) => {
+      // if (validateMail(input)) {
+      //   userInputInvalidEmail.classList.remove("error");
+      //   dataState.push(true);
+      // } else {
+      //   userInputInvalidEmail.classList.add("error");
+      //   userInputInvalidEmail.innerText = "Invalid email";
+
+      //   dataState.push(false);
+      // }
+
+      if (input.value.trim() == "") {
+        userInputsError[idx].classList.add("error");
+        input.style.borderColor = "hsl(354, 84%, 57%)";
+
+        dataState.push(false);
+      } else {
+        userInputsError[idx].classList.remove("error");
+        input.style.borderColor = "hsl(213, 96%, 18%)";
+
+        dataState.push(true);
+      }
+    });
+
+    console.log(dataState);
+    return dataState.every((data) => data === true);
+  }
+
+  function validateMail(input) {
+    if (input.type == "email") {
+      const emailRegex = RegExp(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+      );
+      console.log(emailRegex.test(input.value));
+      return emailRegex.test(input.value);
+    }
   }
 
   function showStep(stepIndex) {

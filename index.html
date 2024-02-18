@@ -83,7 +83,10 @@
             </div>
 
             <span>
-              <label for="name">Name</label>
+              <div>
+                <label for="name">Name</label>
+                <p role="error" hidden>This field is required</p>
+              </div>
               <input
                 class="fw-700"
                 id="name"
@@ -93,7 +96,13 @@
             </span>
 
             <span>
-              <label for="email">Email</label>
+              <div>
+                <label for="email">Email</label>
+                <p role="error" id="email-error" hidden>
+                  This field is required
+                </p>
+              </div>
+
               <input
                 id="email"
                 type="email"
@@ -102,7 +111,10 @@
             </span>
 
             <span>
-              <label for="digits">Phone Number</label>
+              <div>
+                <label for="digits">Phone Number </label>
+                <p role="error" hidden>This field is required</p>
+              </div>
               <input
                 type="tel"
                 pattern="[+][0-9]{3} [0-9]{10,14}"

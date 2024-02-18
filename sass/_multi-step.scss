@@ -38,17 +38,27 @@
       }
 
       &1 {
+        span .error {
+          display: inline-block;
+          color: $primaryStrawberryRed;
+        }
+
         > span {
           display: flex;
           flex-direction: column;
           gap: 5px;
           margin: 10px 0;
 
+          div {
+            display: flex;
+            justify-content: space-between;
+          }
+
           input {
             @include generic-input(15px, null, 5px);
             @include generic-font(14px, 700, initial);
             width: 100%;
-            color: $primaryStrawberryRed;
+            color: $primaryMarineBlue;
           }
 
           input::placeholder {
