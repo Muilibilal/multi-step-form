@@ -255,6 +255,7 @@ a[role=button] {
 }
 .multi-step__container form .step1 span .error {
   display: inline-block;
+  font-weight: 700;
   color: hsl(354, 84%, 57%);
 }
 .multi-step__container form .step1 > span {

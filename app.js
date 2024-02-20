@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     yearly: [90, 120, 150],
   };
 
-  const cardSteps = document.querySelectorAll(".card-step > span  ");
   const steps = document.querySelectorAll(".step");
+  const cardSteps = document.querySelectorAll(".card-step > span  ");
 
   const nextButtons = document.querySelectorAll(".step .next");
   const prevButtons = document.querySelectorAll(".step .previous");
@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const userInputs = document.querySelectorAll(".step1 input");
 
   const figureEls = document.querySelectorAll(".plans__card figure");
+
   let selectedOption = null;
+  let selectedPlanAmount = null;
 
   // Event listener for options
   figureEls.forEach((figure) => {
@@ -30,28 +32,17 @@ document.addEventListener("DOMContentLoaded", function () {
       // Set background color of clicked option
       this.style.backgroundColor = "hsl(217, 100%, 97%)";
       selectedOption = this;
-      console.log(this.childNodes[5].textContent);
+      selectedPlanAmount = this.childNodes[5].textContent;
     });
   });
-
-  // // Event listener for clicks outside of options div
-  // document.addEventListener("click", function (event) {
-  //   if (!event.target.closest(".plans__card figure")) {
-  //     // Reset background color of previously selected option
-  //     if (selectedOption) {
-  //       selectedOption.style.backgroundColor = "";
-  //       selectedOption = null;
-  //     }
-  //   }
-  // });
 
   nextButtons.forEach((button, index) => {
     button.addEventListener("click", function (event) {
       event.preventDefault();
 
-      if (verifyData()) {
-        showStep(index + 1); // Show the next step
-      }
+      showStep(index + 1); // Show the next step
+      // if (verifyData()) {
+      // }
     });
   });
 
@@ -94,15 +85,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return dataState.every((data) => data === true);
   }
 
-  function validateMail(input) {
-    if (input.type == "email") {
-      const emailRegex = RegExp(
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-      );
-      console.log(emailRegex.test(input.value));
-      return emailRegex.test(input.value);
-    }
-  }
+  // function validateMail(input) {
+  //   if (input.type == "email") {
+  //     const emailRegex = RegExp(
+  //       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+  //     );
+  //     console.log(emailRegex.test(input.value));
+  //     return emailRegex.test(input.value);
+  //   }
+  // }
 
   function showStep(stepIndex) {
     steps.forEach((step, index) => {
@@ -124,4 +115,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Show the first step initially
   showStep(0);
+
+  const toggleContainer = document.querySelector(".toggle__container");
+  const stepTwoContainer = document.querySelector(".step2");
+
+  stepTwoContainer.addEventListener("click", (e) => {
+    changePlan(e);
+  });
+
+  function changePlan(e) {
+    figureEls.forEach((figure, idx) => {
+      if (e.target.closest(".theme__button") && e.target.checked) {
+        changeToggleMonthInfo(
+          figure,
+          idx,
+          "hsl(231, 11%, 63%)",
+          "hsl(213, 96%, 18%)",
+          "yearly"
+        );
+      } else {
+        changeToggleMonthInfo(
+          figure,
+          idx,
+          "hsl(213, 96%, 18%)",
+          "hsl(231, 11%, 63%)",
+          "monthly"
+        );
+      }
+    });
+  }
+
+  function changeToggleMonthInfo(
+    figure,
+    idx,
+    addElementColor,
+    removeElementColor,
+    paymentType
+  ) {
+    toggleContainer.firstElementChild.style.color = addElementColor;
+    toggleContainer.lastElementChild.style.color = removeElementColor;
+
+    figure.childNodes[5].textContent =
+      paymentType == "monthly"
+        ? `$${planData.monthly[idx]}/mo`
+        : `$${planData.yearly[idx]}/yr`;
+  }
 });
