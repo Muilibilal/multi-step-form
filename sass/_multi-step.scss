@@ -116,6 +116,10 @@
               gap: 10px;
             }
 
+            &.checked {
+              background-color: $neutralMagnolia;
+            }
+
             > p {
               color: $primaryPurplishBlue;
             }

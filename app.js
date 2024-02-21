@@ -18,8 +18,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const figureEls = document.querySelectorAll(".plans__card figure");
 
+  const stepTwoContainer = document.querySelector(".step2");
+  const toggleContainer = document.querySelector(".toggle__container");
+
+  stepTwoContainer.addEventListener("click", (e) => {
+    changePlan(e);
+  });
+
   let selectedOption = null;
   let selectedPlanAmount = null;
+
+  const allAmount = [];
   const switchState = Array.from({ length: stepsEls.length }).fill(0);
 
   // Event listener for options
@@ -34,18 +43,26 @@ document.addEventListener("DOMContentLoaded", function () {
       this.style.backgroundColor = "hsl(217, 100%, 97%)";
       selectedOption = this;
       selectedPlanAmount = this.childNodes[5].textContent;
+      allAmount[0] = selectedPlanAmount;
     });
   });
 
   nextButtons.forEach((button, index) => {
     button.addEventListener("click", function (event) {
       event.preventDefault();
+      console.log(allAmount);
 
       if (verifyInputData() && switchState[0] == 0) {
         switcher(0, index);
       }
       if (selectedPlanAmount && switchState[1] == 0) {
         switcher(1, index);
+      }
+      if (getChecked() > 0 && switchState[2] == 0) {
+        switcher(2, index);
+      }
+      if (allAmount.length > 1) {
+        getTotal();
       }
     });
   });
@@ -125,13 +142,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Show the first step initially
   showStep(0);
 
-  const toggleContainer = document.querySelector(".toggle__container");
-  const stepTwoContainer = document.querySelector(".step2");
-
-  stepTwoContainer.addEventListener("click", (e) => {
-    changePlan(e);
-  });
-
   function changePlan(e) {
     figureEls.forEach((figure, idx) => {
       if (e.target.closest(".theme__button") && e.target.checked) {
@@ -164,9 +174,92 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleContainer.firstElementChild.style.color = addElementColor;
     toggleContainer.lastElementChild.style.color = removeElementColor;
 
-    figure.childNodes[5].textContent =
+    let updatedData = null;
+
+    updatedData =
       paymentType == "monthly"
         ? `$${planData.monthly[idx]}/mo`
         : `$${planData.yearly[idx]}/yr`;
+
+    figure.childNodes[5].textContent = updatedData;
+
+    if (figure.style.backgroundColor == "rgb(240, 246, 255)") {
+      allAmount[0] = updatedData;
+    }
+  }
+
+  // Get all checkbox containers
+  const checkboxContainers = document.querySelectorAll(".add-ons__card > div");
+
+  // Add click event listener to each container
+  checkboxContainers.forEach((container) => {
+    container.addEventListener("click", () => {
+      // Toggle checkbox state
+      const checkbox = container.querySelector('input[type="checkbox"]');
+      checkbox.checked = !checkbox.checked;
+
+      // Toggle background color
+      container.classList.toggle("checked");
+    });
+  });
+
+  function getChecked(forFinishing) {
+    const checkedCheckboxes = [];
+    const addOnValueEls = [];
+
+    // Iterate over all checkboxes
+    checkboxContainers.forEach((container, idx) => {
+      const checkbox = container.querySelector('input[type="checkbox"]');
+      const checkboxMirroed = document.querySelector(
+        `[data-checkbox='${checkbox.getAttribute("role")}']`
+      );
+
+      if (checkbox.checked) {
+        let addOnValueEl = checkboxMirroed.querySelector("span");
+
+        let addOnValue = addOnValueEl.textContent;
+
+        checkboxMirroed.style.display = "flex";
+        checkedCheckboxes.push(checkbox.getAttribute("role"));
+
+        allAmount[idx + 1] == addOnValue
+          ? allAmount
+          : allAmount.push(addOnValue);
+
+        addOnValueEls.push(addOnValueEl);
+      } else {
+        checkboxMirroed.style.display = "none";
+      }
+    });
+
+    if (forFinishing) {
+      return addOnValueEls;
+    }
+
+    return checkedCheckboxes.length;
+  }
+
+  function getTotal() {
+    const finishingUpEl = document.querySelector(".arcade__card");
+    const totalAmountEl = document.querySelector("[role='total-amount']");
+
+    finishingUpEl.querySelector("[role='data-plan']").textContent =
+      allAmount[0];
+
+    [...getChecked(true)].forEach((val, idx) => {
+      val.textContent = allAmount[idx + 1];
+    });
+
+    const allAmountSum = allAmount
+      .join(" ")
+      .match(/\d+/g)
+      .reduce((acc, curr) => acc + parseInt(curr), 0);
+
+    console.log(allAmount.join(" ").match(/\d+/g));
+
+    let anountType = allAmount[0].slice(-2);
+    totalAmountEl.textContent = `+$${allAmountSum} ${
+      anountType == "mo" ? "/mo" : "/yr"
+    }`;
   }
 });

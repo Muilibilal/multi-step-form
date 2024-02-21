@@ -320,6 +320,9 @@ a[role=button] {
   display: flex;
   gap: 10px;
 }
+.multi-step__container form .step3 .add-ons__card > div.checked {
+  background-color: hsl(217, 100%, 97%);
+}
 .multi-step__container form .step3 .add-ons__card > div > p {
   color: hsl(243, 100%, 62%);
 }
