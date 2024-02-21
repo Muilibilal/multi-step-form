@@ -262,4 +262,11 @@ document.addEventListener("DOMContentLoaded", function () {
       anountType == "mo" ? "/mo" : "/yr"
     }`;
   }
+
+  const confirmFormButton = document.querySelector("[data-submit='confirm']");
+
+  confirmFormButton.addEventListener("click", () => {
+    document.querySelector("form").style.display = "none";
+    document.querySelector(".confirmation__page").style.display = "flex";
+  });
 });
