@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     yearly: [90, 120, 150],
   };
 
-  const steps = document.querySelectorAll(".step");
-  const cardSteps = document.querySelectorAll(".card-step > span  ");
+  const stepsEls = document.querySelectorAll(".step");
+  const cardStepsEls = document.querySelectorAll(".card-step > span  ");
 
   const nextButtons = document.querySelectorAll(".step .next");
   const prevButtons = document.querySelectorAll(".step .previous");
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let selectedOption = null;
   let selectedPlanAmount = null;
+  const switchState = Array.from({ length: stepsEls.length }).fill(0);
 
   // Event listener for options
   figureEls.forEach((figure) => {
@@ -40,21 +41,31 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function (event) {
       event.preventDefault();
 
-      showStep(index + 1); // Show the next step
-      // if (verifyData()) {
-      // }
+      if (verifyInputData() && switchState[0] == 0) {
+        switcher(0, index);
+      }
+      if (selectedPlanAmount && switchState[1] == 0) {
+        switcher(1, index);
+      }
     });
   });
+
+  // show step and also control step state
+  const switcher = (value, index) => {
+    switchState[value] = 1;
+    showStep(index + 1); // Show the next step
+  };
 
   prevButtons.forEach((button, index) => {
     button.addEventListener("click", function (event) {
       event.preventDefault();
 
       showStep(index); // Show the prev step
+      switchState[index] = 0;
     });
   });
 
-  function verifyData() {
+  function verifyInputData() {
     let dataState = [];
 
     userInputs.forEach((input, idx) => {
@@ -80,8 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
         dataState.push(true);
       }
     });
-
-    console.log(dataState);
     return dataState.every((data) => data === true);
   }
 
@@ -96,15 +105,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // }
 
   function showStep(stepIndex) {
-    steps.forEach((step, index) => {
+    stepsEls.forEach((step, index) => {
       if (index === stepIndex) {
         step.style.display = "flex"; // Show the selected step
       } else {
-        step.style.display = "none"; // Hide other steps
+        step.style.display = "none"; // Hide other stepsEls
       }
     });
 
-    cardSteps.forEach((cardstep, index) => {
+    cardStepsEls.forEach((cardstep, index) => {
       if (index === stepIndex) {
         cardstep.setAttribute("role", "active");
       } else {
@@ -133,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "hsl(213, 96%, 18%)",
           "yearly"
         );
-      } else {
+      } else if (e.target.closest(".theme__button") && !e.target.checked) {
         changeToggleMonthInfo(
           figure,
           idx,
