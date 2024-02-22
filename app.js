@@ -1,43 +1,48 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Data for changing plan on toggle
   const planData = {
     monthly: [9, 12, 15],
     yearly: [90, 120, 150],
   };
 
+  // DOM Selections
   const stepsEls = document.querySelectorAll(".step");
+  const userInputs = document.querySelectorAll(".step1 input");
+  const userInputsError = document.querySelectorAll(".step1 [role='error']");
+  const userInputInvalidEmail = document.querySelectorAll(
+    ".step1 #email-error"
+  )[0];
+
+  const stepTwoContainer = document.querySelector(".step2");
+
   const cardStepsEls = document.querySelectorAll(".card-step > span  ");
 
   const nextButtons = document.querySelectorAll(".step .next");
   const prevButtons = document.querySelectorAll(".step .previous");
 
-  const userInputsError = document.querySelectorAll(".step1 [role='error']");
-  const userInputInvalidEmail = document.querySelectorAll(
-    ".step1 #email-error"
-  )[0];
-  const userInputs = document.querySelectorAll(".step1 input");
-
   const figureEls = document.querySelectorAll(".plans__card figure");
-
-  const stepTwoContainer = document.querySelector(".step2");
   const toggleContainer = document.querySelector(".toggle__container");
 
-  const changePlanEl = document.querySelector("#change-plan");
+  // Get all checkbox containers
+  const checkboxContainers = document.querySelectorAll(".add-ons__card > div");
 
+  const changePlanEl = document.querySelector("#change-plan");
+  const confirmFormButton = document.querySelector("[data-submit='confirm']");
+
+  let selectedOption = null;
+  let selectedPlanAmount = null;
+  const allAmount = [];
+  const switchState = Array.from({ length: stepsEls.length }).fill(0);
+
+  // Event listeners
   changePlanEl.addEventListener("click", (e) => {
     e.preventDefault();
-
     showStep(1);
   });
 
   stepTwoContainer.addEventListener("click", (e) => {
     changePlanSelected(e);
   });
-
-  let selectedOption = null;
-  let selectedPlanAmount = null;
-
-  const allAmount = [];
-  const switchState = Array.from({ length: stepsEls.length }).fill(0);
 
   // Event listener for options
   figureEls.forEach((figure) => {
@@ -59,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
   nextButtons.forEach((button, index) => {
     button.addEventListener("click", function (event) {
       event.preventDefault();
-      console.log(allAmount);
 
       if (verifyInputData() && switchState[0] == 0) {
         switcher(0, index);
@@ -113,6 +117,19 @@ document.addEventListener("DOMContentLoaded", function () {
     return dataState;
   }
 
+  // Add click event listener to each container
+  checkboxContainers.forEach((container) => {
+    container.addEventListener("click", () => {
+      // Toggle checkbox state
+      const checkbox = container.querySelector('input[type="checkbox"]');
+      checkbox.checked = !checkbox.checked;
+
+      // Toggle background color
+      container.classList.toggle("checked");
+    });
+  });
+
+  // Functions
   function validateMail(input) {
     let isValid = null;
 
@@ -213,21 +230,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Get all checkbox containers
-  const checkboxContainers = document.querySelectorAll(".add-ons__card > div");
-
-  // Add click event listener to each container
-  checkboxContainers.forEach((container) => {
-    container.addEventListener("click", () => {
-      // Toggle checkbox state
-      const checkbox = container.querySelector('input[type="checkbox"]');
-      checkbox.checked = !checkbox.checked;
-
-      // Toggle background color
-      container.classList.toggle("checked");
-    });
-  });
-
   function getChecked(forFinishing) {
     const checkedCheckboxes = [];
     const addOnValueEls = [];
@@ -280,20 +282,17 @@ document.addEventListener("DOMContentLoaded", function () {
       .match(/\d+/g)
       .reduce((acc, curr) => acc + parseInt(curr), 0);
 
-    console.log(allAmount.join(" ").match(/\d+/g));
-
     let anountType = allAmount[0].slice(-2);
     totalAmountEl.textContent = `+$${allAmountSum} ${
       anountType == "mo" ? "/mo" : "/yr"
     }`;
   }
 
-  const confirmFormButton = document.querySelector("[data-submit='confirm']");
-
   function useSwitcher(value, idx) {
     if (value) {
       switcher(value, idx);
     }
+
     confirmFormButton.addEventListener("click", () => {
       document.querySelector("form").style.display = "none";
       document.querySelector(".confirmation__page").style.display = "flex";

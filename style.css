@@ -66,7 +66,7 @@ main {
     border-radius: 0px;
     width: 100%;
     height: 150px;
-    background-position: bottom right;
+    background-position: center bottom -70px;
   }
 }
 .card > div {
@@ -314,6 +314,11 @@ a[role=button] {
   font-weight: 700;
   color: hsl(354, 84%, 57%);
 }
+@media only screen and (max-width: 700px) {
+  .multi-step__container form .step1 span .error {
+    font-size: 13px;
+  }
+}
 .multi-step__container form .step1 > span {
   display: flex;
   flex-direction: column;
@@ -323,6 +328,7 @@ a[role=button] {
 .multi-step__container form .step1 > span div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .multi-step__container form .step1 > span input {
   padding: 15px;
