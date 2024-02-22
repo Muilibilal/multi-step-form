@@ -35,6 +35,13 @@ main {
   border-radius: 15px;
   padding: 15px;
 }
+@media only screen and (max-width: 700px) {
+  main {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+}
 
 .card > div > span {
   width: 30px;
@@ -50,6 +57,17 @@ main {
   background-position: center bottom;
   background-size: 100%;
   border-radius: 15px;
+}
+@media only screen and (max-width: 700px) {
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 0px;
+    width: 100%;
+    height: 150px;
+    background-position: bottom right;
+  }
 }
 .card > div {
   display: flex;
@@ -72,6 +90,11 @@ main {
   font-weight: normal;
   text-transform: uppercase;
   color: #fff;
+}
+@media only screen and (max-width: 700px) {
+  .card > div > .card__heading {
+    display: none;
+  }
 }
 .card > div > .card__heading span {
   display: inline-block;
@@ -116,6 +139,13 @@ main {
   border-radius: 15px;
   padding: 15px;
 }
+@media only screen and (max-width: 700px) {
+  main {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+}
 
 a[role=button] {
   cursor: pointer;
@@ -148,6 +178,11 @@ a[role=button] {
   margin: 0 5px;
   padding: 20px;
 }
+@media only screen and (max-width: 700px) {
+  .multi-step__container form .step3 .add-ons__card > div, .multi-step__container form .step2 figure {
+    padding: 15px;
+  }
+}
 .multi-step__container form .step3 .add-ons__card > div:hover, .multi-step__container form .step2 figure:hover {
   border: 1px solid hsl(213, 96%, 18%);
   border-radius: 5px;
@@ -161,6 +196,11 @@ a[role=button] {
   display: inline-block;
   width: 40px;
   margin-bottom: 50px;
+}
+@media only screen and (max-width: 700px) {
+  .multi-step__container form .step3 .add-ons__card > div img, .multi-step__container form .step2 figure img {
+    margin-bottom: 0px;
+  }
 }
 .multi-step__container form .step3 .add-ons__card > div figcaption, .multi-step__container form .step2 figure figcaption {
   font-size: 16px;
@@ -222,6 +262,7 @@ a[role=button] {
 
 .multi-step__container {
   width: 700px;
+  max-width: 100%;
 }
 .multi-step__container form {
   display: flex;
@@ -229,11 +270,26 @@ a[role=button] {
   margin: 0 50px;
   overflow: hidden;
 }
+@media only screen and (max-width: 700px) {
+  .multi-step__container form {
+    margin: 0 auto;
+    margin-top: -50px;
+    max-width: 90%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+  }
+}
 .multi-step__container form .step {
   min-width: 100%;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
+}
+@media only screen and (max-width: 700px) {
+  .multi-step__container form .step {
+    margin-top: 15px;
+  }
 }
 .multi-step__container form .step h3 {
   font-size: 32px;
@@ -289,8 +345,27 @@ a[role=button] {
   justify-content: space-around;
   width: 100%;
 }
+@media only screen and (max-width: 700px) {
+  .multi-step__container form .step2 > section {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
 .multi-step__container form .step2 figure {
   width: 100%;
+}
+@media only screen and (max-width: 700px) {
+  .multi-step__container form .step2 figure {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+  }
+}
+.multi-step__container form .step2 figure .yr-free {
+  display: none;
+  color: hsl(213, 96%, 18%);
+  margin-top: 5px;
 }
 .multi-step__container form .step2 .toggle__container {
   display: flex;
@@ -373,6 +448,16 @@ a[role=button] {
   align-items: center;
   justify-content: center;
 }
+@media only screen and (max-width: 700px) {
+  .multi-step__container .confirmation__page figure {
+    box-shadow: 3px 5px 10px hsl(229, 24%, 87%);
+    margin-top: -50px;
+    justify-content: flex-start;
+    padding: 50px 15px 0;
+    background-color: #fff;
+    border-radius: 15px;
+  }
+}
 .multi-step__container .confirmation__page figure figcaption {
   font-size: 32px;
   font-weight: 700;
@@ -382,6 +467,7 @@ a[role=button] {
 .multi-step__container .confirmation__page figure p {
   color: hsl(231, 11%, 63%);
   text-align: center;
+  word-spacing: 1px;
 }
 
 /*# sourceMappingURL=style.css.map */

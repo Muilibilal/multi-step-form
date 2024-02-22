@@ -21,8 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const stepTwoContainer = document.querySelector(".step2");
   const toggleContainer = document.querySelector(".toggle__container");
 
+  const changePlanEl = document.querySelector("#change-plan");
+
+  changePlanEl.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    showStep(1);
+  });
+
   stepTwoContainer.addEventListener("click", (e) => {
-    changePlan(e);
+    changePlanSelected(e);
   });
 
   let selectedOption = null;
@@ -42,7 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Set background color of clicked option
       this.style.backgroundColor = "hsl(217, 100%, 97%)";
       selectedOption = this;
-      selectedPlanAmount = this.childNodes[5].textContent;
+      // selectedPlanAmount = this.childNodes[5].textContent;
+      selectedPlanAmount = this.querySelector("p").textContent;
       allAmount[0] = selectedPlanAmount;
     });
   });
@@ -84,43 +93,50 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function verifyInputData() {
-    let dataState = [];
+    let dataState = null;
+    let mailBool = [];
 
     userInputs.forEach((input, idx) => {
-      // if (validateMail(input)) {
-      //   userInputInvalidEmail.classList.remove("error");
-      //   dataState.push(true);
-      // } else {
-      //   userInputInvalidEmail.classList.add("error");
-      //   userInputInvalidEmail.innerText = "Invalid email";
-
-      //   dataState.push(false);
-      // }
-
       if (input.value.trim() == "") {
         userInputsError[idx].classList.add("error");
         input.style.borderColor = "hsl(354, 84%, 57%)";
 
-        dataState.push(false);
+        dataState = false;
       } else {
         userInputsError[idx].classList.remove("error");
         input.style.borderColor = "hsl(213, 96%, 18%)";
-
-        dataState.push(true);
+        mailBool.push(validateMail(input));
+        dataState = mailBool.filter((v) => v != null)[0];
       }
     });
-    return dataState.every((data) => data === true);
+
+    return dataState;
   }
 
-  // function validateMail(input) {
-  //   if (input.type == "email") {
-  //     const emailRegex = RegExp(
-  //       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  //     );
-  //     console.log(emailRegex.test(input.value));
-  //     return emailRegex.test(input.value);
-  //   }
-  // }
+  function validateMail(input) {
+    let isValid = null;
+
+    if (input.type == "email") {
+      const emailRegex = RegExp(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+      );
+
+      let isEmailValid = emailRegex.test(input.value);
+
+      if (isEmailValid) {
+        userInputInvalidEmail.classList.remove("error");
+        userInputInvalidEmail.innerText = "";
+
+        isValid = true;
+      } else {
+        userInputInvalidEmail.classList.add("error");
+        userInputInvalidEmail.innerText = "Invalid email";
+
+        isValid = false;
+      }
+    }
+    return isValid;
+  }
 
   function showStep(stepIndex) {
     stepsEls.forEach((step, index) => {
@@ -143,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Show the first step initially
   showStep(0);
 
-  function changePlan(e) {
+  function changePlanSelected(e) {
     figureEls.forEach((figure, idx) => {
       if (e.target.closest(".theme__button") && e.target.checked) {
         changeToggleMonthInfo(
@@ -176,13 +192,21 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleContainer.lastElementChild.style.color = removeElementColor;
 
     let updatedData = null;
+    let monthFreeEl = document.createElement("p");
+    monthFreeEl.innerHTML = "2 months free";
+    monthFreeEl.style.color = "hsl(213, 96%, 18%)";
+    monthFreeEl.style.marginTop = "5px";
 
-    updatedData =
-      paymentType == "monthly"
-        ? `$${planData.monthly[idx]}/mo`
-        : `$${planData.yearly[idx]}/yr`;
+    if (paymentType == "monthly") {
+      updatedData = `$${planData.monthly[idx]}/mo`;
+      figure.querySelector(".yr-free").style.display = "none";
+    } else {
+      updatedData = `$${planData.yearly[idx]}/yr`;
+      figure.querySelector(".yr-free").style.display = "block";
+    }
 
-    figure.childNodes[5].textContent = updatedData;
+    // console.log(figure.childNodes[1]);
+    figure.querySelector("p").textContent = updatedData;
 
     if (figure.style.backgroundColor == "rgb(240, 246, 255)") {
       allAmount[0] = updatedData;

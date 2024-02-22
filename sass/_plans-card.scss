@@ -7,6 +7,10 @@
   margin: 0 5px;
   padding: 20px;
 
+  @media only screen and (max-width: 700px) {
+    padding: 15px;
+  }
+
   &:hover {
     @include border-mixin($primaryMarineBlue, 5px);
   }
@@ -20,6 +24,10 @@
     display: inline-block;
     width: 40px;
     margin-bottom: 50px;
+
+    @media only screen and (max-width: 700px) {
+      margin-bottom: 0px;
+    }
   }
 
   figcaption {
