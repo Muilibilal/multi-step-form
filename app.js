@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       if (allAmount.length > 1) {
         getTotal();
+        useSwitcher(3, index);
       }
     });
   });
@@ -265,8 +266,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const confirmFormButton = document.querySelector("[data-submit='confirm']");
 
-  confirmFormButton.addEventListener("click", () => {
-    document.querySelector("form").style.display = "none";
-    document.querySelector(".confirmation__page").style.display = "flex";
-  });
+  function useSwitcher(value, idx) {
+    if (value) {
+      switcher(value, idx);
+    }
+    confirmFormButton.addEventListener("click", () => {
+      document.querySelector("form").style.display = "none";
+      document.querySelector(".confirmation__page").style.display = "flex";
+    });
+  }
 });
